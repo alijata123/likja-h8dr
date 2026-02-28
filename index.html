@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Likja - Elite Digital Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+
+/* Emergency Fallback CSS - Glassmorphism */
+:root {
+    --primary: #3b82f6;
+    --secondary: #1e40af;
+    --accent: #60a5fa;
+    --text: #1f2937;
+    --bg: #f3f4f6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    color: var(--text);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Glassmorphism Navigation */
+nav {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: var(--accent);
+}
+
+/* Sections */
+section {
+    padding: 5rem 2rem;
+}
+
+.hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+/* Cards with Glassmorphism */
+.feature-card, .service-card, .testimonial-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.feature-card:hover, .service-card:hover, .testimonial-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px 0 rgba(31, 38, 135, 0.5);
+}
+
+/* Grid Layouts */
+.features-grid, .services-grid, .testimonials-grid, .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+/* Footer - Responsive Multi-Column */
+footer {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(20px);
+    color: white;
+    padding: 4rem 2rem 2rem;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+    margin-bottom: 2rem;
+}
+
+.footer-column h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column ul li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-column a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.footer-column a:hover {
+    color: var(--primary);
+    transform: translateX(5px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-icons a {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    background: var(--primary);
+    transform: translateY(-3px);
+}
+
+/* Forms */
+input, textarea, select {
+    width: 100%;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: white;
+}
+
+input::placeholder, textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-menu {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .features-grid, .services-grid, .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .footer-column a:hover {
+        transform: none; /* Remove horizontal shift on mobile */
+    }
+    
+    .social-icons {
+        justify-content: center;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span>Likja</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="https://videos.pexels.com/video-files/853889/853889-hd_1920_1080_25fps.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="title-line">Elite Digital</span>
+                    <span class="title-line">Craftsman</span>
+                </h1>
+                <p class="hero-subtitle">Transforming ideas into extraordinary digital experiences through innovative design and cutting-edge technology</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary">View My Work</button>
+                    <button class="btn btn-secondary">Get In Touch</button>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+            <span>Scroll</span>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Core Expertise</h2>
+                <p>Specializing in modern digital solutions that drive results</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <polyline points="14,2 14,8 20,8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Web Development</h3>
+                    <p>Full-stack solutions using modern frameworks and technologies for scalable applications</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="2"/>
+                            <line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>UI/UX Design</h3>
+                    <p>User-centered design approach creating intuitive and visually stunning interfaces</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>System Architecture</h3>
+                    <p>Robust and scalable system designs optimized for performance and maintainability</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                            <polygon points="10,8 16,12 10,16 10,8" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h3>Brand Strategy</h3>
+                    <p>Comprehensive brand development and digital marketing strategies that resonate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="section-header">
+                        <h2>About Me</h2>
+                        <p>Passionate about creating digital experiences that matter</p>
+                    </div>
+                    <div class="about-description">
+                        <p>With over 8 years in digital design and development, I've helped startups and Fortune 500 companies transform their digital presence. My approach combines technical excellence with creative vision to deliver solutions that not only look exceptional but perform flawlessly.</p>
+                        <p>I believe in the power of collaboration, continuous learning, and pushing the boundaries of what's possible in the digital realm.</p>
+                    </div>
+                    <div class="skills-section">
+                        <h3>Technical Skills</h3>
+                        <div class="skill-bars">
+                            <div class="skill-item">
+                                <div class="skill-header">
+                                    <span>Frontend Development</span>
+                                    <span>95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="95"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-header">
+                                    <span>UI/UX Design</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-header">
+                                    <span>Backend Systems</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="85"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="about-image">
+                        <div class="image-placeholder"></div>
+                    </div>
+                    <div class="experience-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-year">2023</div>
+                            <div class="timeline-content">
+                                <h4>Senior Full-Stack Developer</h4>
+                                <p>Leading digital transformation projects</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2020</div>
+                            <div class="timeline-content">
+                                <h4>UI/UX Design Lead</h4>
+                                <p>Established design systems and processes</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2018</div>
+                            <div class="timeline-content">
+                                <h4>Frontend Developer</h4>
+                                <p>Built responsive web applications</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Services & Solutions</h2>
+                <p>Comprehensive digital services tailored to your needs</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-header">
+                        <h3>Web Development</h3>
+                        <div class="service-price">From $2,500</div>
+                    </div>
+                    <ul class="service-features">
+                        <li>Custom web applications</li>
+                        <li>Responsive design</li>
+                        <li>Performance optimization</li>
+                        <li>SEO implementation</li>
+                        <li>Content management</li>
+                    </ul>
+                    <button class="btn btn-outline">Get Quote</button>
+                </div>
+                <div class="service-card featured">
+                    <div class="service-badge">Most Popular</div>
+                    <div class="service-header">
+                        <h3>Full-Stack Solution</h3>
+                        <div class="service-price">From $5,000</div>
+                    </div>
+                    <ul class="service-features">
+                        <li>Complete web application</li>
+                        <li>Database design & setup</li>
+                        <li>API development</li>
+                        <li>Cloud deployment</li>
+                        <li>Ongoing maintenance</li>
+                    </ul>
+                    <button class="btn btn-primary">Start Project</button>
+                </div>
+                <div class="service-card">
+                    <div class="service-header">
+                        <h3>Design Consultation</h3>
+                        <div class="service-price">From $1,000</div>
+                    </div>
+                    <ul class="service-features">
+                        <li>UX/UI audit</li>
+                        <li>Design strategy</li>
+                        <li>Prototype development</li>
+                        <li>Brand guidelines</li>
+                        <li>Design systems</li>
+                    </ul>
+                    <button class="btn btn-outline">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Client Testimonials</h2>
+                <p>What clients say about working with me</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <span>★★★★★</span>
+                    </div>
+                    <p>"Likja transformed our digital presence completely. The attention to detail and technical expertise exceeded our expectations. Our conversion rates increased by 150% within the first month."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"></div>
+                        <div class="author-info">
+                            <h4>Sarah Chen</h4>
+                            <span>CEO, TechFlow Solutions</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <span>★★★★★</span>
+                    </div>
+                    <p>"Working with Likja was a game-changer for our startup. The modern design and seamless functionality helped us secure our Series A funding. Highly recommended!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"></div>
+                        <div class="author-info">
+                            <h4>Marcus Rodriguez</h4>
+                            <span>Founder, InnovateLab</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <span>★★★★★</span>
+                    </div>
+                    <p>"The level of professionalism and creativity is unmatched. Likja delivered a solution that perfectly aligned with our brand vision and business goals."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"></div>
+                        <div class="author-info">
+                            <h4>Emma Thompson</h4>
+                            <span>Creative Director, PixelCraft</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Projects</h2>
+                <p>A showcase of recent work and achievements</p>
+            </div>
+            <div class="bento-grid">
+                <div class="bento-item large" data-project="ecommerce">
+                    <div class="project-overlay">
+                        <h3>E-commerce Platform</h3>
+                        <p>Full-stack solution with 50K+ users</p>
+                        <span class="project-tag">React • Node.js</span>
+                    </div>
+                </div>
+                <div class="bento-item medium" data-project="fintech">
+                    <div class="project-overlay">
+                        <h3>FinTech Dashboard</h3>
+                        <p>Real-time analytics platform</p>
+                        <span class="project-tag">Vue.js • D3.js</span>
+                    </div>
+                </div>
+                <div class="bento-item small" data-project="mobile">
+                    <div class="project-overlay">
+                        <h3>Mobile App</h3>
+                        <p>Cross-platform solution</p>
+                        <span class="project-tag">React Native</span>
+                    </div>
+                </div>
+                <div class="bento-item medium" data-project="saas">
+                    <div class="project-overlay">
+                        <h3>SaaS Platform</h3>
+                        <p>B2B productivity tool</p>
+                        <span class="project-tag">Angular • .NET</span>
+                    </div>
+                </div>
+                <div class="bento-item small" data-project="portfolio">
+                    <div class="project-overlay">
+                        <h3>Brand Identity</h3>
+                        <p>Complete visual system</p>
+                        <span class="project-tag">Design</span>
+                    </div>
+                </div>
+                <div class="bento-item large" data-project="enterprise">
+                    <div class="project-overlay">
+                        <h3>Enterprise Solution</h3>
+                        <p>Scalable architecture for 10K+ employees</p>
+                        <span class="project-tag">Microservices</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="section-header">
+                        <h2>Let's Create Something Amazing</h2>
+                        <p>Ready to transform your digital presence? Let's discuss your project</p>
+                    </div>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>hello@likja.dev</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📱</div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <h4>Location</h4>
+                                <p>San Francisco, CA</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link">GitHub</a>
+                        <a href="#" class="social-link">LinkedIn</a>
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">Dribbble</a>
+                    </div>
+                </div>
+                <div class="contact-form-container">
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="project">Project Type</label>
+                            <select id="project" name="project">
+                                <option value="">Select a service</option>
+                                <option value="web-development">Web Development</option>
+                                <option value="ui-ux-design">UI/UX Design</option>
+                                <option value="full-stack">Full-Stack Solution</option>
+                                <option value="consultation">Consultation</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Likja</h3>
+                <p>Elite digital craftsman specializing in modern web solutions and innovative design experiences.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="GitHub">🔗</a>
+                    <a href="#" aria-label="LinkedIn">💼</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="Dribbble">🎨</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#services">Services</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="#">Web Development</a></li>
+                    <li><a href="#">UI/UX Design</a></li>
+                    <li><a href="#">Full-Stack Solutions</a></li>
+                    <li><a href="#">Consultation</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Newsletter</h3>
+                <p>Stay updated with the latest insights and project updates</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Likja. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-body">
+                <div class="project-details">
+                    <h2 id="modal-title">Project Title</h2>
+                    <p id="modal-description">Project description will go here...</p>
+                    <div class="project-tech">
+                        <h4>Technologies Used:</h4>
+                        <div id="modal-tech" class="tech-tags"></div>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn btn-primary">Live Demo</a>
+                        <a href="#" class="btn btn-outline">View Code</a>
+                    </div>
+                </div>
+                <div class="project-images">
+                    <div id="modal-image" class="project-showcase"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation functionality
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // Close mobile menu if open
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Animate skill bars on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const skillBars = entry.target.querySelectorAll('.skill-progress');
+                    skillBars.forEach(bar => {
+                        const width = bar.getAttribute('data-width');
+                        setTimeout(() => {
+                            bar.style.width = width + '%';
+                        }, 200);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        const skillsSection = document.querySelector('.skills-section');
+        if (skillsSection) {
+            skillObserver.observe(skillsSection);
+        }
+
+        // Project modal functionality
+        const projectModal = document.getElementById('project-modal');
+        const modalClose = document.querySelector('.modal-close');
+        const bentoItems = document.querySelectorAll('.bento-item');
+
+        const projectData = {
+            ecommerce: {
+                title: 'E-commerce Platform',
+                description: 'A comprehensive e-commerce solution built with modern technologies, featuring real-time inventory management, secure payment processing, and advanced analytics. The platform supports over 50,000 active users with 99.9% uptime.',
+                tech: ['React', 'Node.js', 'PostgreSQL', 'Redis', 'AWS'],
+                image: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+            },
+            fintech: {
+                title: 'FinTech Dashboard',
+                description: 'A real-time financial analytics dashboard providing comprehensive market insights and portfolio management tools. Features interactive charts, risk assessment algorithms, and automated reporting.',
+                tech: ['Vue.js', 'D3.js', 'Python', 'FastAPI', 'MongoDB'],
+                image: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'
+            },
+            mobile: {
+                title: 'Mobile Application',
+                description: 'Cross-platform mobile application with seamless user experience across iOS and Android. Includes offline functionality, push notifications, and biometric authentication.',
+                tech: ['React Native', 'TypeScript', 'Firebase', 'GraphQL'],
+                image: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
+            },
+            saas: {
+                title: 'SaaS Platform',
+                description: 'B2B productivity platform designed to streamline team collaboration and project management. Features include real-time collaboration, automated workflows, and comprehensive reporting.',
+                tech: ['Angular', '.NET Core', 'SQL Server', 'SignalR', 'Azure'],
+                image: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)'
+            },
+            portfolio: {
+                title: 'Brand Identity System',
+                description: 'Complete visual identity and brand system for a tech startup, including logo design, color palette, typography guidelines, and marketing materials. Established consistent brand presence across all touchpoints.',
+                tech: ['Adobe Creative Suite', 'Figma', 'Principle', 'After Effects'],
+                image: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
+            },
+            enterprise: {
+                title: 'Enterprise Solution',
+                description: 'Scalable enterprise application architecture designed to handle 10,000+ concurrent users. Implements microservices architecture with containerized deployment and comprehensive monitoring.',
+                tech: ['Microservices', 'Docker', 'Kubernetes', 'Kafka', 'Elasticsearch'],
+                image: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)'
+            }
+        };
+
+        bentoItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const projectKey = item.getAttribute('data-project');
+                const project = projectData[projectKey];
+                
+                if (project) {
+                    document.getElementById('modal-title').textContent = project.title;
+                    document.getElementById('modal-description').textContent = project.description;
+                    
+                    const techContainer = document.getElementById('modal-tech');
+                    techContainer.innerHTML = project.tech.map(tech => 
+                        `<span class="tech-tag">${tech}</span>`
+                    ).join('');
+                    
+                    const imageContainer = document.getElementById('modal-image');
+                    imageContainer.style.background = project.image;
+                    
+                    projectModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        modalClose.addEventListener('click', () => {
+            projectModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === projectModal) {
+                projectModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Form submission
+        const contactForm = document.querySelector('.contact-form');
+        const newsletterForm = document.querySelector('.newsletter-form');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Add form submission logic here
+            alert('Thank you for your message! I\'ll get back to you soon.');
+            contactForm.reset();
+        });
+
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Add newsletter subscription logic here
+            alert('Thank you for subscribing to the newsletter!');
+            newsletterForm.reset();
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroContent = document.querySelector('.hero-content');
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            
+            if (heroContent) {
+                heroContent.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+            
+            if (scrollIndicator) {
+                scrollIndicator.style.opacity = Math.max(0, 1 - scrolled / 500);
+            }
+        });
+
+        // Add active class to navigation based on scroll position
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let currentSection = '';
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop <= 100) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
